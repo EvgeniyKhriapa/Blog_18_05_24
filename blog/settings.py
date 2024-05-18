@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Мої додатки
     'main.apps.MainConfig',
+    # Інші додатки
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [

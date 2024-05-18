@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Головна сторінка</title>
-</head>
-<body>
-</body>
-</html>
+{% extends "main/base.html" %}
+
+{% block content %}
+<div>
+    <a href="{% url 'main:topics' %}">Список тем</a>
+    <a href="{% url 'main:new_topic' %}">Додати тему</a>
+</div>
+{% endblock content %}

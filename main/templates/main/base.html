@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мій блог</title>
+</head>
+<body>
+    <div>
+        <a href="{% url 'main:home' %}">Головна сторінка</a>
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+    <ol>
+        {% for topic in topics %}
+            <li>
+                {{ topic }}
+                <a href="{% url 'main:topic' topic.id %}">Докладніше</a>
+                <a href="{% url 'main:new_entry' topic.id %}">Додати запис</a>
+            </li>
+        {% empty %}
+            На даний момент тем немає.
+        {% endfor %}
+    </ol>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+Тема:{{ topic }}
+<li>Записи:</li>
+<div>
+    {% for entry in entries %}
+        <li>
+            <p>{{ entry.date}}</p>
+            <p>{{ entry.text}}</p>
+            <a href="{% url 'main:edit_entry' entry.id %}">Змінити запис</a>
+        </li>
+    {% empty %}
+        На даний момент записів немає.
+    {% endfor %}
+</div>
+{% endblock content %}
