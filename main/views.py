@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 
@@ -60,3 +60,13 @@ def edit_entry(request, entry_id):
     else:
         form = EntryForm(instance=entry)
     return render(request, 'main/edit_entry.html', {'form': form, 'entry': entry})
+
+
+def del_topic(request, topic_id):
+    """Видалення теми"""
+    top = Topic.objects.get(id=topic_id)
+    if request.method == 'GET':
+        top.delete()
+        return redirect('main:topics')
+    else:
+        return render('main/home.html', {'top': top})
