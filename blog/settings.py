@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Мої додатки
     'main.apps.MainConfig',
+    'users.apps.UsersConfig',
     # Інші додатки
     'bootstrap4',
 ]

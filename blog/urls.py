@@ -19,5 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Додаток тем
     path('', include('main.urls', namespace='main')),
+    # Додаток для користувачів
+    path('users/', include('users.urls', namespace='users')),
 ]

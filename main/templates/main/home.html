@@ -2,7 +2,15 @@
 
 {% block content %}
 <div>
-    <a href="{% url 'main:topics' %}">Список тем</a>
-    <a href="{% url 'main:new_topic' %}">Додати тему</a>
+    {% if user.is_authenticated %}
+        <p>Привіт, {{ user.username }}.</p>
+        <div>
+            <a href="{% url 'main:topics' %}">Список тем</a>
+            <a href="{% url 'main:new_topic' %}">Додати тему</a>
+            <a href="{% url 'users:login_out' %}">Вихід</a>
+        </div>
+    {% else %}
+        <div><a href="{% url 'users:login' %}">Вхід</a></div>
+    {% endif %}
 </div>
 {% endblock content %}

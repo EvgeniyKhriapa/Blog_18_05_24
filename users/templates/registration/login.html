@@ -1,0 +1,10 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<form method="post" action="{% url 'users:login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Вхід</button>
+    <input type="hidden" name="next" value="{% url 'main:home' %}" />
+</form>
+{% endblock content %}
