@@ -1,0 +1,11 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button name="submit">Підтвердити зміни</button>
+    </form>
+    <a href="{% url 'main:topics' %}">Перейти до тем?</a>
+{% endblock content %}

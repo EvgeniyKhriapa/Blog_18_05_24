@@ -1,10 +1,10 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-<form method="post" action="{% url 'users:register' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">Реєстрація</button>
-    <input type="hidden" name="next" value="{% url 'users:user_login' %}" />
-</form>
+    <form method="post" action="{% url 'users:register' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">Реєстрація</button>
+        <input type="hidden" name="next" value="{% url 'users:user_login' %}" />
+    </form>
 {% endblock content %}
