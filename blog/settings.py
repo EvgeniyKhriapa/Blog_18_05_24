@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     # Інші додатки
     'bootstrap4',
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [

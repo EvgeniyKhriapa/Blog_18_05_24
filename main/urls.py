@@ -17,4 +17,12 @@ urlpatterns = [
     path('edit_entry/<int:entry_id>', views.edit_entry, name='edit_entry'),
     # Видалення теми
     path('delete_topic/<int:topic_id>/', views.del_topic, name='del_topic'),
+    # Завантаження фото за темою
+    path('new_photo/<int:topic_id>/', views.new_photo, name='new_photo'),
+    # Завантаження аудіо за темою
+    path('new_audio/<int:topic_id>/', views.new_audio, name='new_audio'),
+    # Завантаження відео за темою
+    path('new_video/<int:topic_id>/', views.new_video, name='new_video'),
+    # Завантаження файлу за темою
+    path('new_file/<int:topic_id>/', views.new_file, name='new_file'),
 ]

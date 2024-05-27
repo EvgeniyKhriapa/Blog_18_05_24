@@ -2,11 +2,47 @@
 
 {% block content %}
 <div>Тема:{{ topic }}</div>
-    {% for entry in entries %}
-            <p>{{ entry.date}}</p>
-            <p>{{ entry.text}}</p>
-            <a href="{% url 'main:edit_entry' entry.id %}">Змінити запис</a>
-    {% empty %}
-        На даний момент записів немає.
-    {% endfor %}
+    <div>
+        {% for new_photo in new_photos %}
+            <img src="{{ new_photo.image.url }}" height="200px" width="216px">
+        {% empty %}
+            <p>Немає збережних фото</p>
+        {% endfor %}
+        <a href="{% url 'main:new_photo' topic.id %}">Додати фото</a>
+    </div>
+    <div>
+        {% for new_video in new_videos %}
+            <p>{{ new_video.title }}</p>
+            <video width="320" height="240" controls src="{{ new_video.video.url }}"></video>
+        {% empty %}
+            <p>Немає завантажених відео</p>
+        {% endfor %}
+        <p><a href="{% url 'main:new_video' topic.id %}">Додати відео</a></p>
+    </div>
+    <div>
+        {% for new_audio in new_audios %}
+            <p>{{ new_audio.title }}</p>
+            <audio controls src="{{ new_audio.audio.url }}"></audio>
+        {% empty %}
+            <p>Немає завантажених аудіо</p>
+        {% endfor %}
+    </div>
+    <p><a href="{% url 'main:new_audio' topic.id %}">Додати аудіо</a></p>
+    <div>
+        {% for new_file in new_files %}
+            <a href="{{ new_file.file.url }}">{{ new_file.title }}</a>
+        {% empty %}
+            <p>Немає завантажених файлів</p>
+        {% endfor %}
+    </div>
+    <p><a href="{% url 'main:new_file' topic.id %}">Додати файл</a></p>
+    <div>
+        {% for entry in entries %}
+                <p>{{ entry.date}}</p>
+                <p>{{ entry.text}}</p>
+                <a href="{% url 'main:edit_entry' entry.id %}">Змінити запис</a>
+        {% empty %}
+            На даний момент записів немає.
+        {% endfor %}
+    </div>
 {% endblock content %}
