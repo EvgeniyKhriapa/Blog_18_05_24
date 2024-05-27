@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse
-from .forms import LoginForm
+from .forms import LoginForm, UsersRegistrationForm
 
 
 def user_login(request):
@@ -36,12 +36,13 @@ def logged(request):
 def register(request):
     """Реєстрація користувачів"""
     if request.method != 'POST':
-        form = UserCreationForm()
+        form = UsersRegistrationForm()
     else:
-        form = UserCreationForm(request.POST)
+        form = UsersRegistrationForm(request.POST)
         if form.is_valid():
-            new_user = form.save()
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data['password'])
+            new_user.save()
             login(request, new_user)
-            return render(request, 'registration/register_done.html', {'form': form})
+            return render(request, 'registration/register_done.html', {'new_user': new_user})
     return render(request, 'registration/register.html', {'form': form})
-
