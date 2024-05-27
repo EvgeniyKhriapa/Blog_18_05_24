@@ -1,0 +1,9 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+    <form action="{% url 'users:logged' %}" method="post">
+        {% csrf_token %}
+        <p>Бажаєте покинути сайт?</p>
+        <button type="submit">Вийти</button>
+    </form>
+{% endblock content %}

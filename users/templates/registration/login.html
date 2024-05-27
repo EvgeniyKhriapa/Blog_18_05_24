@@ -1,7 +1,7 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-<form method="post" action="{% url 'users:login' %}">
+<form method="post" action="{% url 'users:user_login' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button name="submit">Вхід</button>

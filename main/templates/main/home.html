@@ -7,10 +7,10 @@
         <div>
             <a href="{% url 'main:topics' %}">Список тем</a>
             <a href="{% url 'main:new_topic' %}">Додати тему</a>
-            <a href="{% url 'users:logout' %}">Вихід</a>
+            <a href="{% url 'users:logged' %}">Вихід</a>
         </div>
     {% else %}
-        <div><a href="{% url 'users:login' %}">Вхід</a></div>
+        <div><a href="{% url 'users:user_login' %}">Вхід</a></div>
         <div><a href="{% url 'users:register' %}">Реєстрація</a></div>
     {% endif %}
 </div>

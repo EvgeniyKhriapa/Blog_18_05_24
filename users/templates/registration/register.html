@@ -5,6 +5,6 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button name="submit">Реєстрація</button>
-    <input type="hidden" name="next" value="{% url 'users:login' %}" />
+    <input type="hidden" name="next" value="{% url 'users:user_login' %}" />
 </form>
 {% endblock content %}
