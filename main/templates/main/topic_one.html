@@ -1,48 +1,87 @@
 {% extends "main/base.html" %}
 
 {% block content %}
+<style>
+        body {
+            background-color: #f2f3f4;
+        }
+        .floating-button {
+          text-decoration: none;
+          display: inline-block;
+          width: 140px;
+          height: 45px;
+          line-height: 45px;
+          border-radius: 45px;
+          margin: 10px 20px;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 11px;
+          text-transform: uppercase;
+          text-align: center;
+          letter-spacing: 3px;
+          font-weight: 600;
+          color: #524f4e;
+          background: white;
+          box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+          transition: .3s;
+        }
+        .floating-button:hover {
+          background: #2EE59D;
+          box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
+          color: white;
+          transform: translateY(-7px);
+        }
+    </style>
 <div>Тема:{{ topic }}</div>
-    <div>
+    <div class="img-line">
         {% for new_photo in new_photos %}
             <img src="{{ new_photo.image.url }}" height="200px" width="216px">
         {% empty %}
-            <p>Немає збережних фото</p>
+            <p class="nav-link">Немає збережних фото</p>
         {% endfor %}
-        <a href="{% url 'main:new_photo' topic.id %}">Додати фото</a>
     </div>
-    <div>
+<a class="floating-button" href="{% url 'main:new_photo' topic.id %}">Додати фото</a>
+    <div class="img-line">
         {% for new_video in new_videos %}
-            <p>{{ new_video.title }}</p>
+            <p class="nav-link">{{ new_video.title }}</p>
             <video width="320" height="240" controls src="{{ new_video.video.url }}"></video>
         {% empty %}
-            <p>Немає завантажених відео</p>
+            <p class="nav-link">Немає завантажених відео</p>
         {% endfor %}
-        <p><a href="{% url 'main:new_video' topic.id %}">Додати відео</a></p>
     </div>
-    <div>
+    <p><a class="floating-button" href="{% url 'main:new_video' topic.id %}">Додати відео</a></p>
+    <div class="img-line">
         {% for new_audio in new_audios %}
-            <p>{{ new_audio.title }}</p>
+            <p class="nav-link">{{ new_audio.title }}</p>
             <audio controls src="{{ new_audio.audio.url }}"></audio>
         {% empty %}
-            <p>Немає завантажених аудіо</p>
+            <p class="nav-link">Немає завантажених аудіо</p>
         {% endfor %}
     </div>
-    <p><a href="{% url 'main:new_audio' topic.id %}">Додати аудіо</a></p>
-    <div>
+    <p><a class="floating-button" href="{% url 'main:new_audio' topic.id %}">Додати аудіо</a></p>
+    <div class="img-line">
         {% for new_file in new_files %}
-            <a href="{{ new_file.file.url }}">{{ new_file.title }}</a>
+            <a class="nav-link" href="{{ new_file.file.url }}">{{ new_file.title }}</a>
         {% empty %}
-            <p>Немає завантажених файлів</p>
+            <p class="nav-link">Немає завантажених файлів</p>
         {% endfor %}
     </div>
-    <p><a href="{% url 'main:new_file' topic.id %}">Додати файл</a></p>
-    <div>
+    <p><a class="floating-button" href="{% url 'main:new_file' topic.id %}">Додати файл</a></p>
+<p class="nav-link">Записи:</p>
+<p>
+    <a class="floating-button" href="{% url 'main:new_entry' topic.id %}">Додати запис</a>
+</p>
         {% for entry in entries %}
-                <p>{{ entry.date}}</p>
-                <p>{{ entry.text}}</p>
-                <a href="{% url 'main:edit_entry' entry.id %}">Змінити запис</a>
-        {% empty %}
-            На даний момент записів немає.
-        {% endfor %}
-    </div>
+        <div class="card mb-3">
+            <h4 class="card-header">
+                {{ entry.date_added|date:'M d, Y H:i' }}
+                <small><a class="floating-button" href="{% url 'main:edit_entry' entry.id %}">Змінити</a></small>
+            </h4>
+            <div class="card-body">
+                {{ entry.text|linebreaks }}
+            </div>
+        </div>
+    {% empty %}
+        <p class="nav-link">Немає жодного запису щодо цієї теми</p>
+    {% endfor %}
+    <p><a class="floating-button" href="{% url 'main:del_topic' topic.id %}">Видалити тему</a></p>
 {% endblock content %}

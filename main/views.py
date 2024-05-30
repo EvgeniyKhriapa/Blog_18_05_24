@@ -37,9 +37,9 @@ def new_topic(request):
     if request.method == 'POST':
         form = TopicForm(request.POST)
         if form.is_valid():
-            form.save(commit=False)
-            form.owner = request.user
-            form.save()
+            new_topic = form.save(commit=False)
+            new_topic.owner = request.user
+            new_topic.save()
             return render(request, 'main/topics.html', {'form': form})
     else:
         form = TopicForm()
