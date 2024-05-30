@@ -1,0 +1,46 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.jumbotron {
+    background-image: url('https://source.unsplash.com/1600x900/?web-development');
+    background-size: cover;
+    color: white;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    font-size: 1rem;
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 1rem 0;
+    border-top: 1px solid #e5e5e5;
+}
+
+/* Additional responsive styles */
+@media (max-width: 768px) {
+    .jumbotron h1 {
+        font-size: 2.5rem;
+    }
+    .jumbotron p {
+        font-size: 1.2rem;
+    }
+    .card-title {
+        font-size: 1.25rem;
+    }
+    .card-text {
+        font-size: 0.9rem;
+    }
+}

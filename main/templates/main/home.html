@@ -1,20 +1,114 @@
-{% extends "main/base.html" %}
-
-{% block content %}
-<div>
-    {% if user.is_authenticated %}
-        <p>Привіт, {{ user.username }}.</p>
-        <div>
-            <a href="{% url 'main:topics' %}">Список тем</a>
-            <a href="{% url 'main:new_topic' %}">Додати тему</a>
-            <a href="{% url 'users:profile_edit_user' %}">Змінити дані профілю</a>
-            <a href="{% url 'users:change_password_user' %}">Змінити пароль</a>
-            <a href="{% url 'users:logged' %}">Вихід</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+{% load bootstrap4 %}
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="{% static 'image.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Log</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'styles.css' %}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Персональний журнал навчання для тебе</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <header class="jumbotron jumbotron-fluid text-center bg-primary text-white">
+        <div class="container">
+            <h1 class="display-4">Learning Log</h1>
+            <p class="lead">Навчайся, досліджуй, експериментуй!</p>
         </div>
-    {% else %}
-        <div><a href="{% url 'users:user_login' %}">Вхід</a></div>
-        <div><a href="{% url 'users:register' %}">Реєстрація</a></div>
-        <a href="{% url 'users:password_reset_request' %}">Скинути пароль</a>
-    {% endif %}
-</div>
-{% endblock content %}
+    </header>
+    <section id="courses" class="container py-5">
+        <div class="row">
+            {% if user.is_authenticated %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Список тем</h5>
+                            <p class="card-text">Список створених для навчання та заміток тем</p>
+                            <a href="{% url 'main:topics' %}" class="btn btn-primary">Перейти</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Додати тему</h5>
+                            <p class="card-text">Додати нову тему для навчання та замітки</p>
+                            <a href="{% url 'main:new_topic' %}" class="btn btn-primary">Перейти</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Змінити дані профілю</h5>
+                            <p class="card-text">Змінити або поновити інформацію щодо Вашого профілю</p>
+                            <a href="{% url 'users:profile_edit_user' %}" class="btn btn-primary">Перейти</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Змінити пароль</h5>
+                            <p class="card-text">Змінити або поновити створений Вами код доступу до сайту</p>
+                            <a href="{% url 'users:change_password_user' %}" class="btn btn-primary">Перейти</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Вихід</h5>
+                            <p class="card-text">Покинути персонального журналу навчання Learning Log</p>
+                            <a href="{% url 'users:logged' %}" class="btn btn-primary">Перейти</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                </div>
+                <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Вхід</h5>
+                            <p class="card-text">Увійти на сайт персонального журналу навчання Learning Log</p>
+                            <a href="{% url 'users:user_login' %}" class="btn btn-primary">Перейти</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Реєстрація</h5>
+                            <p class="card-text">Створити обліковий запис для доступу до створення тем та заміток</p>
+                            <a href="{% url 'users:register' %}" class="btn btn-primary">Перейти</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Скинути пароль</h5>
+                            <p class="card-text">Скинути або перевстановити пароль Вашого облікового запису</p>
+                            <a href="{% url 'users:password_reset_request' %}" class="btn btn-primary">Перейти</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+    <footer class="bg-light py-4 text-center">
+        <p>&copy; 2024 Learning Log. All Rights Reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

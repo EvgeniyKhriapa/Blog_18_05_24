@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-{% load static %}
-{% load bootstrap4 %}
 <html lang="en">
 <head>
+    {% load static %}
+    {% load bootstrap4 %}
     <meta charset="UTF-8">
-    <title>Мій блог</title>
+    <title>Журнал навчання</title>
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">
+                        {{ message|safe }}
+                        <a href="#" class="close">x</a>
+                    </li>
+                {% endfor %}
+            </ul>
+    	{% endif %}
 </head>
 <body>
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li class="{{ message.tags }}">
-                    {{ message|safe }}
-                    <a href="#" class="close">x</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <div>
-        <a href="{% url 'main:home' %}">Головна сторінка</a>
-        {% block content %}
-        {% endblock content %}
-    </div>
+{% block content %}
+{% endblock content %}
 </body>
 </html>
