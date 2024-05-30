@@ -44,10 +44,10 @@ def password_reset_request(request):
                     messages.success(request, 'Лист для скидання паролю успішно надісланий.')
             else:
                 messages.error(request, 'Користувач з такою електронною адресою не знайдений.')
-            return render(request, 'registration/password_reset_request.html')
+            return render(request, 'password_reset_request.html')
     else:
         form = PasswordResetRequestForm()
-    return render(request, "registration/password_reset_request.html", {"form": form})
+    return render(request, "password_reset_request.html", {"form": form})
 
 
 def user_login(request):
