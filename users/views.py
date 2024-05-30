@@ -4,6 +4,50 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse
 from .forms import LoginForm, UsersRegistrationForm, UsersEditForm, ProfileEditForm
 from django.contrib.auth.decorators import login_required
+from .forms import CustomPasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from .forms import PasswordResetRequestForm
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.core.mail import send_mail
+
+
+def password_reset_request(request):
+    """Скидання пароля через електронну пошту"""
+    if request.method == "POST":
+        form = PasswordResetRequestForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            associated_users = User.objects.filter(email=email)
+            if associated_users.exists():
+                for user in associated_users:
+                    subject = "Запит на скидання паролю"
+                    email_template_name = "password_reset_email.txt"
+                    context = {
+                        "email": user.email,
+                        'domain': request.META['HTTP_HOST'],
+                        'site_name': 'Ваш сайт',
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "user": user,
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'http',
+                    }
+                    email_content = render_to_string(email_template_name, context)
+                    try:
+                        send_mail(subject, email_content, 'admin@yourdomain.com', [user.email], fail_silently=False)
+                    except Exception as e:
+                        messages.error(request, 'Виникла помилка при надсиланні електронного листа: ' + str(e))
+                    messages.success(request, 'Лист для скидання паролю успішно надісланий.')
+            else:
+                messages.error(request, 'Користувач з такою електронною адресою не знайдений.')
+            return render(request, 'registration/password_reset_request.html')
+    else:
+        form = PasswordResetRequestForm()
+    return render(request, "registration/password_reset_request.html", {"form": form})
 
 
 def user_login(request):
@@ -63,3 +107,19 @@ def profile_edit_user(request):
             user_form.save()
             profile_form.save()
     return render(request, 'user/profile_edit_user.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+@login_required
+def password_change_user(request):
+    """Зміна пароля користувача"""
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            new_password = form.cleaned_data['new_password']
+            request.user.set_password(new_password)
+            request.user.save()
+            update_session_auth_hash(request, request.user)
+            return redirect('main:topics')
+    else:
+        form = CustomPasswordChangeForm(user=request.user)
+    return render(request, 'registration/password_change_user.html', {'form': form})

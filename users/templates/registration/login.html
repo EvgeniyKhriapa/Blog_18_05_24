@@ -7,4 +7,5 @@
     <button name="submit">Вхід</button>
     <input type="hidden" name="next" value="{% url 'main:home' %}" />
 </form>
+    <a href="{% url 'users:password_reset_request' %}">Забули пароль?</a>
 {% endblock content %}

@@ -8,11 +8,13 @@
             <a href="{% url 'main:topics' %}">Список тем</a>
             <a href="{% url 'main:new_topic' %}">Додати тему</a>
             <a href="{% url 'users:profile_edit_user' %}">Змінити дані профілю</a>
+            <a href="{% url 'users:change_password_user' %}">Змінити пароль</a>
             <a href="{% url 'users:logged' %}">Вихід</a>
         </div>
     {% else %}
         <div><a href="{% url 'users:user_login' %}">Вхід</a></div>
         <div><a href="{% url 'users:register' %}">Реєстрація</a></div>
+        <a href="{% url 'users:password_reset_request' %}">Скинути пароль</a>
     {% endif %}
 </div>
 {% endblock content %}
