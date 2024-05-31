@@ -73,7 +73,7 @@ def edit_entry(request, entry_id):
         form = EntryForm(instance=entry, data=request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'main/topics.html', {'form': form, 'entry': entry, 'topic': topic})
+            return render(request, 'main/home.html', {'form': form, 'entry': entry, 'topic': topic})
     else:
         form = EntryForm(instance=entry)
     return render(request, 'main/edit_entry.html', {'form': form, 'entry': entry})

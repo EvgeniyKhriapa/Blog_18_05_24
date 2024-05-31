@@ -1,10 +1,13 @@
 {% extends "main/base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
 <form method="post" action="{% url 'users:user_login' %}">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">Вхід</button>
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button name="submit" class="btn btn-primary">Вхід</button>
+    {% endbuttons %}
     <input type="hidden" name="next" value="{% url 'main:home' %}" />
 </form>
     <a href="{% url 'users:password_reset_request' %}">Забули пароль?</a>

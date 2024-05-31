@@ -1,11 +1,14 @@
 {% extends "main/base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        <button name="submit">Підтвердити зміни</button>
+        {% bootstrap_form user_form %}
+        {% bootstrap_form profile_form %}
+        {% buttons %}
+        <button name="submit" class="btn btn-primary">Зберегти зміни</button>
+        {% endbuttons %}
     </form>
     <a href="{% url 'main:topics' %}">Перейти до тем?</a>
 {% endblock content %}

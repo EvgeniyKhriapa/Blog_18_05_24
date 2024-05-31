@@ -1,9 +1,14 @@
 {% extends "main/base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
-   <form class="form" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Завантажити</button>
-  </form>
+    <ol>
+       <form class="form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+            <button type="submit">Завантажити</button>
+            {% endbuttons %}
+      </form>
+   </ol>
 {% endblock content %}

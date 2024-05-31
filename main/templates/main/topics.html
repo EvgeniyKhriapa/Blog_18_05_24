@@ -1,42 +1,18 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-<style>
+    <style>
         body {
             background-color: #f2f3f4;
         }
-        .floating-button {
-          text-decoration: none;
-          display: inline-block;
-          width: 140px;
-          height: 45px;
-          line-height: 45px;
-          border-radius: 45px;
-          margin: 10px 20px;
-          font-family: 'Montserrat', sans-serif;
-          font-size: 11px;
-          text-transform: uppercase;
-          text-align: center;
-          letter-spacing: 3px;
-          font-weight: 600;
-          color: #524f4e;
-          background: white;
-          box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
-          transition: .3s;
+        a {
+            list-style-type: none;
         }
-        .floating-button:hover {
-          background: #2EE59D;
-          box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
-          color: white;
-          transform: translateY(-7px);
+        a:before {
+            content: "♜";
         }
     </style>
-    <ul class="nav-link">
         {% for topic in topics %}
-            <li><h4><a class="nav-link" href="{% url 'main:topic' topic.id %}">{{ topic }}</a></h4></li>
-            <li><a class="nav-link" href="{% url 'main:topic' topic.id %}">Докладніше</a></li>
-            <li><a class="nav-link" href="{% url 'main:new_entry' topic.id %}">Додати запис</a></li>
-            <li><a class="nav-link" href="{% url 'main:del_topic' topic.id %}">Видалити тему</a></li>
+            <h4><a class="nav-link" href="{% url 'main:topic' topic.id %}">{{ topic }}</a></h4>
         {% endfor %}
-    </ul>
 {% endblock content %}

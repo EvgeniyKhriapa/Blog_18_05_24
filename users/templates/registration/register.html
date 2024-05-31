@@ -1,10 +1,13 @@
 {% extends "main/base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
     <form method="post" action="{% url 'users:register' %}">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="submit">Реєстрація</button>
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button name="submit" class="btn btn-primary">Реєстрація</button>
+        {% endbuttons %}
         <input type="hidden" name="next" value="{% url 'users:user_login' %}" />
     </form>
 {% endblock content %}

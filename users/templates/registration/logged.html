@@ -1,9 +1,12 @@
 {% extends "main/base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
     <form action="{% url 'users:logged' %}" method="post">
         {% csrf_token %}
         <p>Бажаєте покинути сайт?</p>
-        <button type="submit">Вийти</button>
+        {% buttons %}
+        <button name="submit" class="btn btn-primary">Вийти</button>
+        {% endbuttons %}
     </form>
 {% endblock content %}

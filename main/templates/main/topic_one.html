@@ -31,57 +31,58 @@
           transform: translateY(-7px);
         }
     </style>
-<div>Тема:{{ topic }}</div>
-    <div class="img-line">
-        {% for new_photo in new_photos %}
-            <img src="{{ new_photo.image.url }}" height="200px" width="216px">
-        {% empty %}
-            <p class="nav-link">Немає збережних фото</p>
-        {% endfor %}
-    </div>
-<a class="floating-button" href="{% url 'main:new_photo' topic.id %}">Додати фото</a>
-    <div class="img-line">
-        {% for new_video in new_videos %}
-            <p class="nav-link">{{ new_video.title }}</p>
-            <video width="320" height="240" controls src="{{ new_video.video.url }}"></video>
-        {% empty %}
-            <p class="nav-link">Немає завантажених відео</p>
-        {% endfor %}
-    </div>
-    <p><a class="floating-button" href="{% url 'main:new_video' topic.id %}">Додати відео</a></p>
-    <div class="img-line">
-        {% for new_audio in new_audios %}
-            <p class="nav-link">{{ new_audio.title }}</p>
-            <audio controls src="{{ new_audio.audio.url }}"></audio>
-        {% empty %}
-            <p class="nav-link">Немає завантажених аудіо</p>
-        {% endfor %}
-    </div>
-    <p><a class="floating-button" href="{% url 'main:new_audio' topic.id %}">Додати аудіо</a></p>
-    <div class="img-line">
-        {% for new_file in new_files %}
-            <a class="nav-link" href="{{ new_file.file.url }}">{{ new_file.title }}</a>
-        {% empty %}
-            <p class="nav-link">Немає завантажених файлів</p>
-        {% endfor %}
-    </div>
-    <p><a class="floating-button" href="{% url 'main:new_file' topic.id %}">Додати файл</a></p>
-<p class="nav-link">Записи:</p>
-<p>
-    <a class="floating-button" href="{% url 'main:new_entry' topic.id %}">Додати запис</a>
-</p>
-        {% for entry in entries %}
-        <div class="card mb-3">
-            <h4 class="card-header">
-                {{ entry.date_added|date:'M d, Y H:i' }}
-                <small><a class="floating-button" href="{% url 'main:edit_entry' entry.id %}">Змінити</a></small>
-            </h4>
-            <div class="card-body">
-                {{ entry.text|linebreaks }}
+    <ol>
+        <h2 class="nav-link">{{ topic|linebreaks }}</h2>
+            <div class="img-line">
+                {% for new_photo in new_photos %}
+                    <img src="{{ new_photo.image.url }}" height="200px" width="216px">
+                {% empty %}
+                    <p class="nav-link">Немає фото</p>
+                {% endfor %}
             </div>
-        </div>
-    {% empty %}
-        <p class="nav-link">Немає жодного запису щодо цієї теми</p>
-    {% endfor %}
-    <p><a class="floating-button" href="{% url 'main:del_topic' topic.id %}">Видалити тему</a></p>
+        <a class="floating-button" href="{% url 'main:new_photo' topic.id %}">Додати фото</a>
+            <div class="img-line">
+                {% for new_video in new_videos %}
+                    <p class="nav-link">{{ new_video.title|linebreaks }}</p>
+                    <video width="320" height="240" controls src="{{ new_video.video.url }}"></video>
+                {% empty %}
+                    <p class="nav-link">Немає відео</p>
+                {% endfor %}
+            </div>
+            <p><a class="floating-button" href="{% url 'main:new_video' topic.id %}">Додати відео</a></p>
+            <div class="img-line">
+                {% for new_audio in new_audios %}
+                    <p class="nav-link">{{ new_audio.title|linebreaks }}</p>
+                    <audio controls src="{{ new_audio.audio.url }}"></audio>
+                {% empty %}
+                    <p class="nav-link">Немає аудіо</p>
+                {% endfor %}
+            </div>
+            <p><a class="floating-button" href="{% url 'main:new_audio' topic.id %}">Додати аудіо</a></p>
+            <div class="img-line">
+                {% for new_file in new_files %}
+                    <a class="nav-link" href="{{ new_file.file.url }}">{{ new_file.title|linebreaks }}</a>
+                {% empty %}
+                    <p class="nav-link">Немає файлів</p>
+                {% endfor %}
+            </div>
+            <p><a class="floating-button" href="{% url 'main:new_file' topic.id %}">Додати файл</a></p>
+                {% for entry in entries %}
+                <div class="card mb-3">
+                    <h4 class="card-header">
+                        {{ entry.date_added|date:'M d, Y H:i' }}
+                        <small><a class="floating-button" href="{% url 'main:edit_entry' entry.id %}">Змінити</a></small>
+                    </h4>
+                    <div class="card-body">
+                        {{ entry.text|linebreaks }}
+                    </div>
+                </div>
+            {% empty %}
+                <p class="nav-link">Немає запису</p>
+            {% endfor %}
+        <p>
+            <a class="floating-button" href="{% url 'main:new_entry' topic.id %}">Додати запис</a>
+        </p>
+            <a class="floating-button" href="{% url 'main:del_topic' topic.id %}">Видалити тему</a>
+    </ol>
 {% endblock content %}

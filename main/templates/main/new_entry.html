@@ -1,11 +1,13 @@
 {% extends "main/base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
 <div>
     <form action="{% url 'main:new_entry' topic.id %}" method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button name="submit">Додати запис</button>
+      {% bootstrap_form form %}
+      {% buttons %}
+      <button type="submit">Додати</button>
+      {% endbuttons %}
     </form>
 </div>
 {% endblock content %}
