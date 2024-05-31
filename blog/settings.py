@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Інші додатки
     'bootstrap4',
     'django_cleanup',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
@@ -81,8 +82,10 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'learning_log',
+        'USER': 'learning_log',
+        'PASSWORD': '8D9778apa',
     }
 }
 
